@@ -1,0 +1,32 @@
+name: docker build action
+description: 
+inputs:
+  path_dockerfile:
+    description: "dockerfile path"
+    required: true
+    default: "Dockerfile"
+  image_name:
+    description: "image name"
+    required: true
+    default: "cicd_exercise"
+  tag_name:
+    description: "tag name"
+    required: false
+    default: "latest"
+runs:
+  using: composite
+  steps:
+  - run: |
+      if [ -z "${{ inputs.tag_name }}" ]; then
+        echo "TAG=$(date +%s)" >> $GITHUB_ENV
+      else
+        echo "TAG=${{ inputs.tag_name }}" >> $GITHUB_ENV
+      fi
+    shell: bash
+
+  - run: |
+      NAME=${{inputs.image_name}}:${{env.TAG}}
+      echo "DOCKER_IMAGE_NAME=$NAME" >> $GITHUB_ENV
+      
+      docker build . --file ${{inputs.path_dockerfile}} --tag $NAME
+    shell: bash

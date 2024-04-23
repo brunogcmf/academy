@@ -14,7 +14,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag cicd-exercise:$(date +%s)
-    - name: Check new images
-      run: docker image ls
+      uses: brunogcmf/academy/.github/actions/docker_build@main
+      with:
+        path_dockerfile: Dockerfile
+        image_name: cicd-exercise-2
+        tag_name: latest
+
+    - name: List Docker images
+      run: docker image list
