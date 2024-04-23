@@ -15,6 +15,6 @@ runs:
   using: composite
   steps:
   - run: |
-      docker tag ${{inputs.imagename}}:${{inputs.tag_name}}
+      docker tag ${{inputs.imagename}} ${{inputs.tag_name}}
       docker push ${{inputs.imagename}}:${{inputs.tag_name}} ${{inputs.username}}/${{inputs.image_name}}
     shell: bash
