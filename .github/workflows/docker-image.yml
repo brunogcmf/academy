@@ -30,4 +30,10 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: push docker image
+      uses: brunogcmf/academy/.github/actions/docker_push@main
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        image_name: cicd-exercise-2
   
