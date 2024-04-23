@@ -17,4 +17,4 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag cicd-exercise:$(date +%s)
     - name: Check new images
-      run: docker images ls
+      run: docker image ls
